@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Header from './header';
 import MainMenu from './mainMenu';
-import {FoldersView} from '../components/FoldersView';
+import {FoldersView} from '../components/Folder/FoldersView';
 
 const topButtons = [
     {

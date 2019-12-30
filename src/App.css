@@ -54,15 +54,24 @@ body, html{
 .headerButton {
   width: 100%;
   margin: 0.5em;
+  box-shadow: 1px 3px 6px 1px #333, inset 0px 0px 20px 13px #d3e9ff ;
+  border-radius: 4px;
+}
+.btn {
+  appearance: button;
+  padding: 0.3em;
+}
+button {
+  background-color: #eee;
+  border-width: 0.1em;
 }
 button:hover, .btn:hover {
-  border-color: #000000;
-  border-width: 3px;
+  background-color: #fff;
   cursor: pointer;
 }
 
 button:active {
-  background-color: #ffffff;
+  background-color: #ddd;
 }
 
 .noDisplay {
