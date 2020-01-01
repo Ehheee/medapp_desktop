@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import FolderRow from './FolderRow';
 import {settings, saveSettings} from '../../../util/conf'
 
 
 const FoldersView = (props) => {
     const [folders, setFolders] = useState([]);
+    const firstRender = useRef(true);
     const addFolder = (evt) => {
         var newFolders;
         if (evt.target.files) {
@@ -23,13 +24,19 @@ const FoldersView = (props) => {
         setFolders(newFolders);
     };
     useEffect(() => {
-        console.log(settings);
-        if (settings && settings.folders) {
-            setFolders(settings.folders);
-        }
+        if (settings && settings.folders && settings.folders[props.name]) {
+            setFolders(settings.folders[props.name]);
+        } 
     }, [])
     useEffect(() => {
-        saveSettings('folders', folders);
+        if (!firstRender.current) {
+            if (!settings.folders) {
+                settings.folders = {};
+            }
+            settings.folders[props.name] = folders;
+            saveSettings(settings);
+        }
+        firstRender.current =false;
     }, [folders]);
     const createFoldersList = () => {
         return folders.map(folder => {
@@ -45,4 +52,4 @@ const FoldersView = (props) => {
             </div>);
 };
 
-export {FoldersView};
+export default FoldersView;

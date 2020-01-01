@@ -1,8 +1,28 @@
 import React, {useState} from 'react';
 import Header from './header';
-import MainMenu from './mainMenu';
-import {FoldersView} from '../components/Folder/FoldersView';
+import {Tab, MusicTab, PhotosTab} from './tabs';
+import {MusicFolders, PhotoFolders} from '../components/folder/FoldersViewTypes';
 
+const structure = {
+    Music: {
+        component: MusicTab,
+        Tracks: {
+            component: 'Tracks'
+        },
+        Folders: {
+            component: MusicFolders
+        }
+    },
+    Photos: {
+        component: PhotosTab,
+        List: {
+            component: 'PhotosList'
+        },
+        Folders: {
+            component: PhotoFolders
+        }
+    }
+};
 const topButtons = [
     {
         name: 'Music',
@@ -11,7 +31,7 @@ const topButtons = [
                 name: 'Tracks'
             }, {
                 name: 'Folders',
-                component: 'FoldersView'
+                component: 'MusicFolders'
             }
         ]
     }, {
@@ -20,33 +40,21 @@ const topButtons = [
             {
                 name: 'List'
             }, {
-                name: 'Folders'
+                name: 'Folders',
+                component: 'PhotoFolders'
             }
         ]
     }
 ];
-const compMap = {
-    'FoldersView': FoldersView
-};
 const Home = (props) => {
-    const [currentMainMenu, setCurrentMainMenu] = useState(topButtons[0].subMenu);
-    const [TagName, setTagName] = useState('FoldersView');
-    const showMainMenu = (b) => {
-        setCurrentMainMenu(b.subMenu)
+    const [content, setContent] = useState();
+    const selectTab = (tabName, tabContent) => {
+        setContent(tabName);
     };
-    const showContent = (menuItem) => {
-        console.log(menuItem.component);
-        console.log(FoldersView);
-        console.log(Header);
-        console.log(TagName);
-        console.log(currentMainMenu);
-        setTagName(menuItem.component);
-    };
-    var Content = compMap[TagName]|| FoldersView;
+    var SubContent = content ? structure[content].component : Tab;
     return (<div className="mainGrid borderThinSolid">
-                <Header buttons={topButtons} buttonClick={showMainMenu}></Header>
-                <MainMenu items={currentMainMenu} buttonClick={showContent}></MainMenu>
-                <div className='content'><Content></Content></div>
+                <Header structure={structure} buttonClick={selectTab}></Header>
+                {content && <SubContent name={content} structure={structure[content]}></SubContent>}
             <div className='footer'>footer</div>
             </div>
     );

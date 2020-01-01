@@ -13,7 +13,7 @@ function App() {
     return (<div>
               <label htmlFor='deviceNameInput'>Enter device name: </label>
               <input id='deviceNameInput' onChange={(e) => setDeviceName(e.target.value)}></input>
-              <button type='button' onClick={() => {saveSettings('deviceName', deviceName); window.location.reload()}}>Save</button>
+              <button type='button' onClick={() => {saveSettings({'deviceName': deviceName}); window.location.reload()}}>Save</button>
             </div>);
   }
 }

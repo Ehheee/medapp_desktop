@@ -1,12 +1,11 @@
 import React from 'react';
 
-const headerButtons = ['Music', 'Photos'];
-
 var Header = (props) => {
     const renderButtons = () => {
-        return props.buttons.map(b => {
-            console.log(b);
-            return <button className='headerButton' onClick={() => props.buttonClick(b)}>{b.name}</button>
+        return Object.keys(props.structure).map((k) => {
+            var v = props.structure[k];
+            console.log(v, k);
+            return <button className='headerButton' onClick={() => props.buttonClick(k,v)}>{k}</button>
         });
     };
     return (<div className='header'>{renderButtons()}</div>);

@@ -2,12 +2,12 @@ const fs = require('fs');
 const localSettingsFile = require('os').homedir() + '\\medapp.json';
 var settings = {};
 if (fs.existsSync(localSettingsFile)){
-    console.log(fs.readFileSync(localSettingsFile, 'UTF-8'));
-    settings = JSON.parse(fs.readFileSync(localSettingsFile));
+    var settingsString = fs.readFileSync(localSettingsFile, 'UTF-8');
+    console.log(settingsString);
+    settings = JSON.parse(settingsString);
     console.log(settings);
 }
-const saveSettings = (key, value) => {
-    settings[key] = value;
+const saveSettings = (settings) => {
     fs.writeFileSync(localSettingsFile, JSON.stringify(settings));
     console.log(settings);
 };
