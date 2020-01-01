@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import FolderRow from './FolderRow';
+import {settings, saveSettings} from '../../../util/conf'
 
-const fs = require('fs');
-const localSettingsFile = require('os').homedir() + '\\medapp.json';
 
 const FoldersView = (props) => {
     const [folders, setFolders] = useState([]);
@@ -15,6 +14,7 @@ const FoldersView = (props) => {
         }
         evt.target.type = '';
         evt.target.type = 'file';
+        console.log(settings);
         setFolders(newFolders);
     };
     const removeFolder = (dir) => {
@@ -23,13 +23,14 @@ const FoldersView = (props) => {
         setFolders(newFolders);
     };
     useEffect(() => {
-        //save folders after change
-    }, [folders]);
-    useEffect(() => {
-        if (!fs.existsSync(localSettingsFile)) {
-            fs.writeFileSync(localSettingsFile, "");
+        console.log(settings);
+        if (settings && settings.folders) {
+            setFolders(settings.folders);
         }
-    }, []);
+    }, [])
+    useEffect(() => {
+        saveSettings('folders', folders);
+    }, [folders]);
     const createFoldersList = () => {
         return folders.map(folder => {
             return <FolderRow onRemove={removeFolder} folder={folder}></FolderRow>
