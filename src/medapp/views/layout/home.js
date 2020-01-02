@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import Header from './header';
-import {Tab, MusicTab, PhotosTab} from './tabs';
+import {MusicTab, PhotosTab} from './tabs';
 import {MusicFolders, PhotoFolders} from '../components/folder/FoldersViewTypes';
 
 const structure = {
@@ -23,29 +23,6 @@ const structure = {
         }
     }
 };
-const topButtons = [
-    {
-        name: 'Music',
-        subMenu: [
-            {
-                name: 'Tracks'
-            }, {
-                name: 'Folders',
-                component: 'MusicFolders'
-            }
-        ]
-    }, {
-        name: 'Photos',
-        subMenu: [
-            {
-                name: 'List'
-            }, {
-                name: 'Folders',
-                component: 'PhotoFolders'
-            }
-        ]
-    }
-];
 const Home = (props) => {
     const [content, setContent] = useState();
     const selectTab = (tabName, tabContent) => {

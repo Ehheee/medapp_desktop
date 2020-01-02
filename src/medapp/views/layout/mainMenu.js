@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const MainMenu = (props) => {
+    const [activeButton, setActiveButton] = useState();
+    const buttonClick = (v, k) => {
+        props.buttonClick(v,k);
+        setActiveButton(k);
+    };
     const renderItems = () => {
         return Object.keys(props.structure).map((k) => {
             if (props.structure[k].component) {
                 var v = props.structure[k];
                 console.log(v,k);
-                return (<button className='mainMenuItem' onClick={() => props.buttonClick(v, k)} type='button'>{k}</button>);
+                return (<button className={'mainMenuItem ' + (activeButton === k ? 'active': '')} onClick={() => buttonClick(v, k)} type='button'>{k}</button>);
             }
         });
     };
