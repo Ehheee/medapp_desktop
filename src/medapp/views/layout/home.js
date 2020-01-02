@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import Header from './header';
 import {Tab, MusicTab, PhotosTab} from './tabs';
 import {MusicFolders, PhotoFolders} from '../components/folder/FoldersViewTypes';
@@ -51,10 +51,15 @@ const Home = (props) => {
     const selectTab = (tabName, tabContent) => {
         setContent(tabName);
     };
-    var SubContent = content ? structure[content].component : Tab;
+    const renderContents = () => {
+        return Object.keys(structure).map((k) => {
+            var SubContent = structure[k].component;
+            return <SubContent hidden={!content || content !== k} key={k} name={k} structure={structure[k]}></SubContent>
+        });
+    };
     return (<div className="mainGrid borderThinSolid">
                 <Header structure={structure} buttonClick={selectTab}></Header>
-                {content && <SubContent name={content} structure={structure[content]}></SubContent>}
+                {renderContents()}
             <div className='footer'>footer</div>
             </div>
     );

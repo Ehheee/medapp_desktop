@@ -15,7 +15,6 @@ const FoldersView = (props) => {
         }
         evt.target.type = '';
         evt.target.type = 'file';
-        console.log(settings);
         setFolders(newFolders);
     };
     const removeFolder = (dir) => {
