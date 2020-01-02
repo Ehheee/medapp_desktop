@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "glob": "^7.1.6",
+    "node": "^10.18.0",
     "nw-react-scripts": "2.1.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "realm": "^4.0.0-beta.0"
   },
   "scripts": {
     "start": "nw-react-scripts start",

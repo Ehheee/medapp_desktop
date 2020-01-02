@@ -7,7 +7,7 @@ const compMap = {
 };
 const Content = (props) => {
     var SubContent = props.structure.component;
-    return (<div>
+    return (<div className='contentElement'>
                 <span>{props.name}</span>
                 <SubContent name={props.name}></SubContent>
             </div>);

@@ -16,14 +16,20 @@ body, html{
   border-radius: 5px;
   border-color: #777
 }
+.borderThinDash {
+  border-style: dashed;
+  border-width: 0.05em;
+  border-radius: 5px;
+  border-color: #aaa;
+}
 
 .mainGrid {
   min-height: 100%;
   width: 98%;
   display: grid;
   grid-template-columns: 150px 1fr 1fr;
-  grid-template-rows: 80px auto 80px;
-  grid-row-gap: 3em;
+  grid-template-rows: 86px auto 80px;
+  grid-row-gap: 0.5em;
   grid-column-gap: 0.5em;
 }
 .header {
@@ -31,7 +37,9 @@ body, html{
   grid-column-start: 1;
   grid-column-end: 4;
   background-color: #ccc;
-  padding: 0.2em;
+  margin: 0.3em;
+  padding-bottom: 0.4em;
+  border-radius: 3px;
 }
 .tab {
   min-height: 200px;
@@ -41,16 +49,22 @@ body, html{
   grid-template-columns: 150px 1fr 1fr;
   grid-column-gap: 0.5em;
 }
-.content {
+.contentContainer {
   grid-column-start: 2;
   grid-column-end: 4;
   min-height: 200px;
   padding: 1em;
   margin-right:0.5em;
-  border-style: dashed;
-  border-width: 0.05em;
-  border-radius: 5px;
-  border-color: #aaa;
+  background-color: #ccc;
+}
+
+.contentElement {
+  min-height: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  padding: 0.5em;
+  box-shadow: 1px 1px 5px 0px #333;
+  border-radius: 3px;
 }
 
 
@@ -61,13 +75,13 @@ body, html{
 }
 
 .mainMenu {
-  margin-left: 0.5em;
+  margin-left: 0.3em;
   margin-right: 0.5em;
   display: flex;
   flex-direction: column;
   background-color: #ccc;
   padding: 0.8em 0.5em 0em 0.5em;
-  
+  border-radius: 3px;
 }
 
 .flexListItem {
@@ -83,7 +97,8 @@ body, html{
   margin-bottom: 0.4em;
   height: 2em;
   width: 100%;
-  box-shadow: 1px 3px 6px 1px #333, inset 0px 0px 4px 4px #e4e4e4
+  box-shadow: 1px 3px 6px 1px #333, inset 0px 0px 4px 4px #e4e4e4;
+  border-radius: 2px;
 }
 .mainMenuItem.active {
   background-color: #fbfbfb;

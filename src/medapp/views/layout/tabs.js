@@ -9,7 +9,7 @@ const Tab = (props) => {
     };
     return (<div className={'tab ' + (props.hidden ? 'hidden' : '')}>
                 <MainMenu structure={props.structure} buttonClick={selectContent}></MainMenu>
-                <div className='content'>
+                <div className='contentContainer borderThinDash'>
                     {content && <Content structure={props.structure[content]} name={props.name}></Content>}
                 </div>
             </div>);
