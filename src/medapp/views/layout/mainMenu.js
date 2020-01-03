@@ -13,6 +13,7 @@ const MainMenu = (props) => {
                 console.log(v,k);
                 return (<button className={'mainMenuItem ' + (activeButton === k ? 'active': '')} onClick={() => buttonClick(v, k)} type='button'>{k}</button>);
             }
+            return;
         });
     };
     return (<div className='mainMenu'>

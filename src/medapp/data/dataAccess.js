@@ -1,33 +1,35 @@
-const Realm = require('realm');
-
-const FolderSchema = {
-    name: 'Folder',
-    primaryKey: 'id',
-    properties: {
-        id: 'int',
-        type: 'string',
-        path: 'string',
-        fileCount: 'int',
-        lastChecked: 'date'
-    }
+var db;
+var folderStore;
+var request = indexedDB.open('medappDB', 1);
+request.onupgradeneeded = (event) => {
+    var scopeDb = event.target.result;
+    folderStore = scopeDb.createObjectStore('folders', {keyPath: 'id', autoIncrement: true});
+    folderStore.createIndex('path', 'path', {unique: true});
+    folderStore.createIndex('type', 'type');
 };
-const instanceSchema = {
-
+request.onsuccess = (event) => {
+    db = event.target.result;
 };
-const schemas = [FolderSchema];
-const DataAccess = {
-    saveFolder: (folder) => {
-        Realm.open({schema:schemas})
-            .then(realm => {
-                if (folder.id) {
-                    realm.write(() => folder);
-                } else {
-                    folder = realm.create("Folder", folder);
-                }
-            }).catch()
-    },
-    getFolders: () => {
-
-    },
+var DataAccess = {};
+DataAccess.getStore = (storeName, mode) => {
+    return db.transaction(storeName, mode).objectStore(storeName);
+}
+DataAccess.saveFolder = (folder, cb) => {
+    var objectStore = DataAccess.getStore('folders', 'readwrite');
+    objectStore.put(folder).onsuccess = cb;
 };
-module.exports = DataAccess;
+DataAccess.getFolders = (type, cb) => {
+    var objectStore = DataAccess.getStore('folders');
+    var index = objectStore.index('type');
+    var folders = [];
+    index.openCursor(IDBKeyRange.only(type)).onsuccess = (event) => {
+        var cursor = event.target.result;
+        if (cursor) {
+            folders.push(cursor.value);
+            cursor.continue();
+        } else {
+            cb(folders);
+        }
+    };
+};
+export default DataAccess;

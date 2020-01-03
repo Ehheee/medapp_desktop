@@ -84,10 +84,11 @@ body, html{
   border-radius: 3px;
 }
 
-.flexListItem {
+.flexListRow {
   display:flex;
   flex-direction: row;
   justify-content: flex-end;
+  margin-bottom: 0.25em;
 }
 .flexListItemLeft {
   margin-right:auto;
