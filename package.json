@@ -2,6 +2,8 @@
   "name": "medapp_desktop",
   "version": "0.1.0",
   "private": true,
+  "chromium-args": "--mixed-context",
+  "node-main": "nodeIndex.js",
   "dependencies": {
     "glob": "^7.1.6",
     "node": "^10.18.0",

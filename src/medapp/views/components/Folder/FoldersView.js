@@ -1,6 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react';
 import FolderRow from './FolderRow';
 import {settings, saveSettings} from '../../../util/conf'
+//import DataAccess from '../../../data/dataAccess';
+const DataAccess = nw.require('../../../data/dataAccess');
 
 
 const FoldersView = (props) => {
@@ -23,6 +25,8 @@ const FoldersView = (props) => {
         setFolders(newFolders);
     };
     useEffect(() => {
+
+
         if (settings && settings.folders && settings.folders[props.name]) {
             setFolders(settings.folders[props.name]);
         } 

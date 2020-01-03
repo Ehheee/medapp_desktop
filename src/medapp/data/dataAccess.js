@@ -1,10 +1,11 @@
-import Realm from 'realm';
+const Realm = require('realm');
 
 const FolderSchema = {
     name: 'Folder',
     primaryKey: 'id',
     properties: {
         id: 'int',
+        type: 'string',
         path: 'string',
         fileCount: 'int',
         lastChecked: 'date'
@@ -29,3 +30,4 @@ const DataAccess = {
 
     },
 };
+module.exports = DataAccess;
