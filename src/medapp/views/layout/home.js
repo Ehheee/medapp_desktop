@@ -2,12 +2,13 @@ import React, {useState, useRef} from 'react';
 import Header from './header';
 import {MusicTab, PhotosTab} from './tabs';
 import {MusicFolders, PhotoFolders} from '../components/folder/FoldersViewTypes';
+import TracksList from '../components/tracks/TracksList';
 
 const structure = {
     Music: {
         component: MusicTab,
         Tracks: {
-            component: 'Tracks'
+            component: TracksList
         },
         Folders: {
             component: MusicFolders

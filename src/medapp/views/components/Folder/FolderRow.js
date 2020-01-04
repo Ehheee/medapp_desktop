@@ -16,14 +16,16 @@ const FolderRow = (props) => {
     };
     const scanFiles = () => {
         setScanning(true);
-        FileScanner.scanFiles(folder.path, folder.type);
+        FileScanner.scanFiles(folder.path, folder.type, () => {
+            setScanning(false);
+        });
     };
     const createScanInfo = () => {
         if (folder.fileCount) {
             return (<div>
                         {scanning && <FontAwesomeIcon size='sm' icon={faSync} spin color='#b90000'/>}
                         <span >{folder.fileCount + " files"}</span>
-                        <button type='button' onClick={scanFiles}>Scan files</button>
+                        <button disabled={scanning && 'disabled'} type='button' onClick={scanFiles}>Scan files</button>
                     </div>
             );
         }
