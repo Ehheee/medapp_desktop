@@ -13,25 +13,25 @@ const FileScanner =  {};
 FileScanner.scanFolder = (dir, type, cb) => {
     glob(dir + '/**/*.' + extensionMap[type], cb);
 };
-FileScanner.onMediaTagSuccess = (file, cb, tag) => {
+FileScanner.onMediaTagSuccess = (file, folderId, cb, tag) => {
     var track = {};
     track.artist = tag.tags.artist;
     track.title = tag.tags.title;
-    var instance = {path: file, type: 'Music'};
+    var instance = {path: file, type: 'Music', folderId: folderId};
     DataAccess.saveTrack(track, [instance], cb && cb());
 };
-FileScanner.processMusicFiles = (cb, err, files) => {
+FileScanner.processMusicFiles = (cb, folderId, err, files) => {
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         jsmediatags.read(file, {
-            onSuccess: FileScanner.onMediaTagSuccess.bind(this, file, i === files.length -1 && cb),
+            onSuccess: FileScanner.onMediaTagSuccess.bind(this, folderId, file, i === files.length -1 && cb),
             onError: function(error) {
               console.log(':(', error.type, error.info);
             }
         });
     }
 };
-FileScanner.scanFiles = (dir, type, cb) => {
-    FileScanner.scanFolder(dir, type, FileScanner.processMusicFiles.bind(this, cb));
+FileScanner.scanFiles = (dir, type, folderId, cb) => {
+    FileScanner.scanFolder(dir, type, FileScanner.processMusicFiles.bind(this, folderId, cb));
 };
 export default FileScanner;
