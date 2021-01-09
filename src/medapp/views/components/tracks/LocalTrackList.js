@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import Track from './Track';
 import DataAccess from '../../../data/dataAccess';
 import Synchronizer from '../../../data/synchronizer';
+import TrackList from './TrackList';
 
-const TracksList = () => {
+const LocalTrackList = () => {
     const [tracks, setTracks] = useState([]);
 
     useEffect(() => {
@@ -12,11 +12,6 @@ const TracksList = () => {
         });
         
     }, []);
-    const createTracks = () => {
-        return tracks.map((track) => {
-            return (<Track key={track.id} track={track}></Track>);
-        });
-    };
     const syncTracks = async () => {
         for (var i = 0; i < tracks.length; i++) {
             var track = tracks[i];
@@ -31,9 +26,9 @@ const TracksList = () => {
     return (<div>
                 <button onClick={() => syncTracks()}>Sync tracks</button>
                 <div>
-                    {createTracks()}
+                    <TrackList tracks={tracks}></TrackList>
                 </div>
             </div>);
 };
 
-export default TracksList;
+export default LocalTrackList;

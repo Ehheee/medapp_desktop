@@ -18,4 +18,19 @@ var sendPost = async (path, data) => {
 Server.saveMusicTrack = async (track) => {
     return await sendPost("/music", track);
 };
+Server.checkYoutube = async (channelId) => {
+    return await sendRequest("/external/youtube/check/" + channelId);
+};
+Server.saveYoutube = async () => {
+    return await sendRequest("/external/youtube/save");
+};
+Server.getYoutubeTracks = async () => {
+    return await sendRequest("/music/byDevice/youtube");
+};
+Server.getDuplicatesForTrack = async (trackId, threshold) => {
+    return await sendRequest("/music/duplicates/" + trackId);
+};
+Server.getGeneratedDuplicatesForTrack = async (trackId) => {
+    return await sendRequest("/music/generatedDuplicates/" + trackId + "?threshold=" + threshold);
+};
 export default Server;

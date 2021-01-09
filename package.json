@@ -10,6 +10,7 @@
     "glob": "^7.1.6",
     "jsmediatags": "^3.9.3",
     "nw-react-scripts": "2.1.1",
+    "pubsub-js": "^1.9.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

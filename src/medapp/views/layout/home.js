@@ -2,13 +2,13 @@ import React, {useState, useRef} from 'react';
 import Header from './header';
 import {MusicTab, PhotosTab} from './tabs';
 import {MusicFolders, PhotoFolders} from '../components/folder/FoldersViewTypes';
-import TracksList from '../components/tracks/TracksList';
+import MusicPage from '../components/tracks/MusicPage';
 
 const structure = {
     Music: {
         component: MusicTab,
         Tracks: {
-            component: TracksList
+            component: MusicPage
         },
         Folders: {
             component: MusicFolders
@@ -35,7 +35,7 @@ const Home = (props) => {
             return <SubContent hidden={!content || content !== k} key={k} name={k} structure={structure[k]}></SubContent>
         });
     };
-    return (<div className="mainGrid borderThinSolid">
+    return (<div className="mainGrid borderThinSolidRound">
                 <Header structure={structure} buttonClick={selectTab}></Header>
                 {renderContents()}
             <div className='footer'>footer</div>
